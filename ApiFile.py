@@ -3,9 +3,13 @@ import DataScraping
 from flask import Flask
 
 app = Flask(__name__)
+app.config["DEBUG"]
 
-@app.route("/")
-@app.route("/getLiveCurrencyData", methods=["GET"])
+@app.route("/", methods=["GET"])
+def home():
+    return '''<h1>Kurların anlık TRY karşılıkları</h1> <p>kullandığınız linkin sonunda "/getLiveExchangeRate" ekleyerek anlık kurlara erişebilirsiniz.</p>'''
+
+@app.route("/getLiveExchangeRate", methods=["GET"])
 def getLiveData():
     return DataScraping.getCurrencyRates()
 
